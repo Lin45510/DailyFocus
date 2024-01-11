@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DailyFocus.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:DailyFocus"
+    xmlns:views="clr-namespace:DailyFocus.View">
+
+    <TabBar Shell.TabBarBackgroundColor="#1D1A21" Shell.TabBarTitleColor="{DynamicResource Primary}" Shell.TabBarUnselectedColor="{DynamicResource Unselected}">
+        <ShellContent Icon="calendar" ContentTemplate="{DataTemplate views:Commitments }"/>
+        <ShellContent Icon="daily" ContentTemplate="{DataTemplate views:Daily }"/>
+        <ShellContent Icon="bank" ContentTemplate="{DataTemplate views:Finance }"/>
+    </TabBar>
+</Shell>

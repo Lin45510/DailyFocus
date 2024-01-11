@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.NewDaily"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
+             xmlns:calendar="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+             xmlns:local="clr-namespace:DailyFocus.Resources.DataTemplateSelectors"
+             Background="{DynamicResource BackGround}"
+             Shell.TabBarIsVisible="False">
+
+    <ContentPage.BindingContext>
+        <viewmodel:NewDailyVM/>
+    </ContentPage.BindingContext>
+
+    <!--#region  Carrousel Tabs-->
+
+    <ContentPage.Resources>
+        <!--#region New Tab -->
+        <DataTemplate x:Key="New">
+            <Grid>
+                <Grid RowDefinitions="auto, auto, auto, auto, auto" RowSpacing="10">
+                    <Grid HeightRequest="40">
+                        <Label Text="Novo" FontSize="17" VerticalOptions="Center" HorizontalOptions="Center"/>
+                    </Grid>
+                    <Entry Text="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=CommitName}" Placeholder="Comrpomisso" Grid.Row="1"/>
+                    <Label Text="Horario" Grid.Row="2"/>
+                    <Grid ColumnDefinitions="0.4*, 0.2*, 0.4*" Grid.Row="3" ColumnSpacing="5">
+                        <TimePicker Grid.Column="0" Time="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=StartTime}"/>
+                        <Image Source="arrow" WidthRequest="20" HorizontalOptions="Center" Grid.Column="1"/>
+                        <TimePicker Grid.Column="2" Time="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=EndTime}"/>
+                    </Grid>
+                    <Entry Text="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=Local}" Placeholder="Local" Grid.Row="4"/>
+                </Grid>
+                <StackLayout Orientation="Horizontal" Spacing="50" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+                    <Button Text="Adicionar" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=NewCommitCommand}"/>
+                </StackLayout>
+            </Grid>
+        </DataTemplate>
+        <!--#endregion-->
+
+        <!--#region Planning Tab-->
+        <DataTemplate x:Key="Planning">
+            <Grid RowDefinitions="auto, *" RowSpacing="10">
+                <Grid HeightRequest="40">
+                    <Label Text="Planejamento" FontSize="17" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=Commitments}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ScrollView>
+                                <Grid VerticalOptions="FillAndExpand">
+                                    <Grid ColumnDefinitions="auto, auto, *" ColumnSpacing="10" Margin="0,10,0,0">
+                                        <VerticalStackLayout Grid.Column="1">
+                                            <Label Text="{Binding StartTime}" FontSize="18"/>
+                                            <Label Text="{Binding EndTime}" FontSize="18"/>
+                                        </VerticalStackLayout>
+                                        <Grid Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <Border BackgroundColor="{DynamicResource Secondary}" StrokeThickness="0">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="15"/>
+                                                </Border.StrokeShape>
+                                            </Border>
+                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </ScrollView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </DataTemplate>
+        <!--#endregion-->
+
+        <!--#region NoTime Tab-->
+        <DataTemplate x:Key="NoTime">
+            <Grid RowDefinitions="auto, *" RowSpacing="10">
+                <Grid HeightRequest="40">
+                    <Label Text="Sem Horario" FontSize="17" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+                <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=NoTimeCommitments}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ScrollView>
+                                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" HeightRequest="60" Margin="0,10,0,0">
+                                    <Border BackgroundColor="{DynamicResource Secondary}" StrokeThickness="0">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="15"/>
+                                        </Border.StrokeShape>
+                                    </Border>
+                                    <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                </Grid>
+                            </ScrollView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </DataTemplate>
+        <!--#endregion-->
+
+        <local:NewDailyDataTemplateSeletor x:Key="carrouselTemplate"
+                                           DataTemplateNew="{StaticResource New}"
+                                           DataTemplatePlanning="{StaticResource Planning}"
+                                           DataTemplateNoTime="{StaticResource NoTime}"/>
+    </ContentPage.Resources>
+
+    <!--#endregion-->
+
+    <Grid Margin="10" RowDefinitions="auto, *" VerticalOptions="FillAndExpand" RowSpacing="10">
+        <Grid>
+            <Border BackgroundColor="{DynamicResource Secondary}" Stroke="Transparent">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="15"/>
+                </Border.StrokeShape>
+            </Border>
+            <calendar:Calendar FooterSectionVisible="False" SelectedDate="{Binding SelectedDate}"
+                               DayTappedCommand="{Binding ChangeDayCommand}"/>
+        </Grid>
+        <CarouselView x:Name="Carouselview" Grid.Row="1" VerticalOptions="EndAndExpand" IndicatorView="indicatorView" IsSwipeEnabled="False" 
+                      ItemsSource="{Binding CarrouselTemplates}" ItemTemplate="{StaticResource carrouselTemplate}"/>
+
+        <Image Source="previous" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding carrousellScrollPreviousCommand}"
+                                      CommandParameter="{x:Reference Carouselview}"/>
+            </Image.GestureRecognizers>
+        </Image>
+        <Image Source="next" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="End">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding carrousellScrollNextCommand}"
+                                      CommandParameter="{x:Reference Carouselview}"/>
+            </Image.GestureRecognizers>
+        </Image>
+    </Grid>
+</ContentPage>

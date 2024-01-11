@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.Daily"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
+             BackgroundColor="{DynamicResource BackGround}">
+
+    <ContentPage.BindingContext>
+        <viewmodel:DailyVM/>
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Margin="10">
+        <Button ImageSource="plus" HeightRequest="45" WidthRequest="45" Command="{Binding NewDailyCommand}"/>
+
+        <CollectionView x:Name="DaysCollectionView" ItemsSource="{Binding Commitments}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowDefinitions="auto, auto" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding DayofWeek}" FontSize="30"/>
+                        <Label Text="{Binding Date}" FontSize="20" HorizontalOptions="EndAndExpand" 
+                               VerticalOptions="EndAndExpand" Margin="0,0,30,0"/>
+                        <CollectionView Grid.Row="1" ItemsSource="{Binding CommitmentsOnDate}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="auto, auto, *"  ColumnSpacing="10" Margin="0,10,0,0">
+                                        <CheckBox x:Name="Teste" IsChecked="{Binding Status}" HorizontalOptions="StartAndExpand">
+                                            <CheckBox.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DailyVM}}, Path=CheckCommand}"
+                                                                      CommandParameter="{Binding}"/>
+                                            </CheckBox.GestureRecognizers>
+                                        </CheckBox>
+                                        <VerticalStackLayout Grid.Column="1">
+                                            <Label Text="{Binding StartTime}" FontSize="18"/>
+                                            <Label Text="{Binding EndTime}" FontSize="18"/>
+                                        </VerticalStackLayout>
+                                        <Grid Grid.Column="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <Border BackgroundColor="{DynamicResource Secondary}" StrokeThickness="0">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="15"/>
+                                                </Border.StrokeShape>
+                                            </Border>
+                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentPage>

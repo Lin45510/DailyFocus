@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.PopUp.CommitmentPopup"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel.PopUp"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Name="CommitPopup"
+             Color="{DynamicResource BackGround}">
+
+    <toolkit:Popup.BindingContext>
+        <viewmodel:CommitmentPopUpVM/>
+    </toolkit:Popup.BindingContext>
+
+    <Grid RowDefinitions="auto, auto, auto, auto, auto, auto" Padding="15" RowSpacing="15" MinimumWidthRequest="250">
+        <Label 
+            Text="Detalhes"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" FontSize="21"/>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="1" Spacing="10">
+            <Label Text="Nome:" FontSize="18"/>
+            <Label Text="{Binding Commitment.Name}" FontSize="18"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="2" Spacing="10">
+            <Label Text="Dia:" FontSize="18"/>
+            <Label Text="{Binding Commitment.Date}" FontSize="18"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="3" Spacing="10">
+            <Label Text="{Binding Commitment.StartTime}" FontSize="18"/>
+            <Image Source="arrow" WidthRequest="18" VerticalOptions="Center"/>
+            <Label Text="{Binding Commitment.EndTime}" FontSize="18"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Grid.Row="4" Spacing="10">
+            <Label Text="Local:" FontSize="18"/>
+            <Label Text="{Binding Commitment.Local}" FontSize="18"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End" Grid.Row="5" Margin="0, 20,0,0">
+            <Button ImageSource="edit" Command="{Binding EditCommand}" CommandParameter="{Binding Source={x:Reference CommitPopup}}"/>
+            <Button ImageSource="delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Source={x:Reference CommitPopup}}" BackgroundColor="Red"/>
+        </StackLayout>
+
+    </Grid>
+</toolkit:Popup>

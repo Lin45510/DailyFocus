@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.NewFinance"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
+             Shell.TabBarIsVisible="False"
+             Shell.BackgroundColor="{DynamicResource BackGround}"
+             BackgroundColor="{DynamicResource BackGround}">
+
+    <ContentPage.BindingContext>
+        <viewmodel:NewFinanceVM/>
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="auto, auto, auto, *" Margin="10">
+        <Entry Text="{Binding FinanceName}" 
+            Placeholder="Nome"/>
+        <HorizontalStackLayout Grid.Row="1" Spacing="20">
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="R$"
+                       VerticalOptions="CenterAndExpand"/>
+                <Entry Text="{Binding FinanceValue}" Keyboard="Numeric"
+                    Placeholder="Valor"/>
+            </HorizontalStackLayout>
+            <Picker x:Name="picker" ItemsSource="{Binding TypeOptions}"
+                    SelectedIndex="{Binding FinanceType}"
+                    Title="Tipo de Conta">
+            </Picker>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Grid.Row="2">
+            <Label Text="Vencimento: " VerticalOptions="CenterAndExpand"/>
+            <DatePicker Date="{Binding FinanceDate}" Format="dd/MM/yyyy" 
+                Grid.Row="2" VerticalOptions="CenterAndExpand"/>
+        </HorizontalStackLayout>
+        <StackLayout Grid.Row="3" Orientation="Horizontal" Spacing="50" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
+            <Button Text="Cancelar" TextColor="White" BackgroundColor="{DynamicResource Secondary}"/>
+            <Button Text="Adicionar" Command="{Binding SaveFinanceCommand}"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

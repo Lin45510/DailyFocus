@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.Finance"
+             xmlns:controls="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
+             xmlns:local="clr-namespace:DailyFocus.Resources.DataTemplateSelectors"
+             BackgroundColor="{DynamicResource BackGround}">
+
+    <ContentPage.BindingContext>
+        <viewmodel:FinnanceVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+
+        <!--#region Carrousel Templates-->
+
+        <!--#region BillsToPay-->
+
+        <DataTemplate x:Key="BillsToPay">
+            <Grid RowDefinitions="auto, *">
+                <Grid HeightRequest="40">
+                    <Label Text="À Pagar" FontSize="17"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <CollectionView ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FinnanceVM}}, Path=Finances}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="auto, *" VerticalOptions="FillAndExpand"
+                                                       HorizontalOptions="FillAndExpand">
+                                    <CheckBox Grid.Column="0"/>
+                                    <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                        <Border BackgroundColor="{DynamicResource Secondary}" Stroke="Transparent">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="30"/>
+                                            </Border.StrokeShape>
+                                        </Border>
+                                        <Grid RowDefinitions="auto, auto">
+                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand"/>
+                                            <FlexLayout Grid.Row="1" JustifyContent="SpaceAround">
+                                                <VerticalStackLayout>
+                                                    <Label Text="Valor" FontSize="20"/>
+                                                    <Label Text="{Binding Value}" FontSize="17"/>
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout>
+                                                    <Label Text="Vencimento" FontSize="20"/>
+                                                    <Label Text="{Binding Date}" FontSize="17"/>
+                                                </VerticalStackLayout>
+                                            </FlexLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <!--#endregion-->
+
+        <!--#region BillsToReceive-->
+
+        <DataTemplate x:Key="BillsToReceive">
+            <Grid RowDefinitions="auto, *">
+                <Grid HeightRequest="40">
+                    <Label Text="À Receber" FontSize="17"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <!--#endregion-->
+
+        <!--#endregion-->
+
+        <local:NewDailyDataTemplateSeletor x:Key="carrouselTemplate"
+                                           DataTemplateAllBills="{StaticResource AllBills}"
+                                           DataTemplateBillsToPay="{StaticResource BillsToPay}"
+                                           DataTemplateBillsToReceive="{StaticResource BillsToReceive}"
+                                           DataTemplatePaidBills="{StaticResource PaidBills}"/>
+
+    </ContentPage.Resources>
+
+    <Grid Margin="10">
+        <Grid RowDefinitions="auto,auto,auto, *" RowSpacing="10">
+            <Grid>
+                <Border BackgroundColor="{DynamicResource Secondary}" Stroke="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="30"/>
+                    </Border.StrokeShape>
+                </Border>
+                <Grid RowDefinitions="auto, auto">
+                    <Label Text="Saldo" FontSize="30"
+                           HorizontalOptions="CenterAndExpand"/>
+                    <HorizontalStackLayout Grid.Row="1" Spacing="10" HorizontalOptions="CenterAndExpand">
+                        <Label Text="R$" FontSize="25"/>
+                        <Label Text="00,00" FontSize="25"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Grid>
+            <Button Grid.Row="1" ImageSource="plus" HeightRequest="40" WidthRequest="40"
+                    Command="{Binding NewFinanceCommand}"/>
+            <Label Text="Despesas" FontSize="30" HorizontalOptions="CenterAndExpand" Grid.Row="2"/>
+            <Grid Grid.Row="3">
+                <CarouselView ItemsSource="{Binding CarrouselTemplates}" ItemTemplate="{StaticResource carrouselTemplate}"/>
+                <Image Source="previous" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer/>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Image Source="next" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="End">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>

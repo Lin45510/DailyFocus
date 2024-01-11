@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.Commitments"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
+             xmlns:model="clr-namespace:DailyFocus.Model"
+             xmlns:calendar="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
+             Shell.TabBarIsVisible="True"
+             x:DataType="viewmodel:CommitmentsVM"
+             xmlns:drawable="clr-namespace:DailyFocus.Resources.Drawable"
+             BackgroundColor="{DynamicResource BackGround}">
+
+    <ContentPage.BindingContext>
+        <viewmodel:CommitmentsVM/>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <drawable:Line x:Key="Drawable"/>
+    </ContentPage.Resources>
+
+    <Grid Margin="10">
+        <Grid RowDefinitions="auto, auto, *" RowSpacing="7">
+            <Grid>
+                <Border BackgroundColor="{DynamicResource Secondary}" Stroke="Transparent">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="15"/>
+                    </Border.StrokeShape>
+                </Border>
+                <calendar:Calendar Culture="{Binding Culture}" SelectedDate="{Binding SelectedDate}"/>
+            </Grid>
+            <Button Grid.Row="1" Text="Novo Compromisso" Command="{Binding NewCommitCommand}"/>
+            <CollectionView ItemsSource="{Binding Commitments}" Grid.Row="2">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:CommitmentsModel">
+                        <ScrollView>
+                            <Grid RowDefinitions="auto, auto">
+                                <Label Text="{Binding Date}" FontSize="25"/>
+                                <CollectionView ItemsSource="{Binding CommitmentsOnDate}" Grid.Row="1">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Orientation="Horizontal" Spacing="20">
+                                                <GraphicsView Drawable="{StaticResource Drawable}"/>
+                                                <Label Text="{Binding Name}" FontSize="17">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer
+                                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:CommitmentsVM}}, Path = CommitDataPopupCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </ScrollView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Grid>
+</ContentPage>
