@@ -61,6 +61,13 @@ namespace DailyFocus.ViewModel
                 Value = FinanceValue
             };
             await _model.Save(finance);
+            FinanceName = "";
+            FinanceDate = new(
+                DateTime.Now.Year,
+                DateTime.Now.Month,
+                DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
+            FinanceType = 0;
+            FinanceValue = 0.0;
         }
 
         #endregion

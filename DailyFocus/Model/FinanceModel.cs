@@ -56,7 +56,7 @@ namespace DailyFocus.Model
 
             Console.WriteLine("DOING ;-;");
 
-            List<FinanceModel> financesByDateTime = finList.OrderBy(x => DateTime.Parse(x.Date + "12:00")).ToList();
+            List<FinanceModel> financesByDateTime = finList.OrderBy(x => DateTime.Parse(string.Join(x.Date, "12:00:00 AM"))).ToList();
 
             Console.WriteLine("DONE!!");
 
