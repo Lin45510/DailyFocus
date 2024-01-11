@@ -48,6 +48,16 @@ namespace DailyFocus.ViewModel
             await Shell.Current.Navigation.PushAsync(new NewFinance());
         }
 
+        [RelayCommand]
+        public async Task Check(FinanceModel finance)
+        {
+            finance.Status = !finance.Status;
+
+            await _model.Edit(finance);
+
+            Finances = await _model.GroupFinancesByDateTime();
+        }
+
         #endregion
     }
 }

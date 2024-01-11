@@ -22,6 +22,7 @@ namespace DailyFocus.Model
         public string Name { get; set; }
         public string Date { get; set; }
         public string Month { get; set; }
+        public string Year { get; set; }
         public int Type { get; set; } // 0 - À Pagar || 1 - À Receber
         public double Value { get; set; }
 
@@ -54,11 +55,7 @@ namespace DailyFocus.Model
 
             List<FinanceModel> finList = await financeDAO.GetItemsAsync();
 
-            Console.WriteLine("DOING ;-;");
-
             List<FinanceModel> financesByDateTime = finList.OrderBy(x => DateTime.Parse(string.Join(x.Date, "12:00:00 AM"))).ToList();
-
-            Console.WriteLine("DONE!!");
 
             foreach (FinanceModel finance in financesByDateTime)
             {
@@ -69,6 +66,25 @@ namespace DailyFocus.Model
         }
 
         public async Task Save(FinanceModel finance)
+        {
+            await financeDAO.SaveItemAsync(finance);
+        }
+
+        public async Task<FinanceModel> GetCommitment(int id)
+        {
+            List<FinanceModel> finances = await financeDAO.GetItemsAsync();
+
+            FinanceModel finance = finances.Find(x => x.Id == id);
+
+            return finance;
+        }
+
+        public async Task Delete(FinanceModel finance)
+        {
+            await financeDAO.DeleteItemAsync(finance);
+        }
+
+        public async Task Edit(FinanceModel finance)
         {
             await financeDAO.SaveItemAsync(finance);
         }
