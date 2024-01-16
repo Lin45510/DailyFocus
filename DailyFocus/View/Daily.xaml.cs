@@ -5,11 +5,10 @@ namespace DailyFocus.View
 {
     public partial class Daily : ContentPage
     {
-        private readonly CommitmentsModel _commits = new();
-        public Daily()
+        public Daily(DailyVM vm)
         {
             InitializeComponent();
-            BindingContext = new DailyVM();
+            BindingContext = vm;
         }
     }
 }

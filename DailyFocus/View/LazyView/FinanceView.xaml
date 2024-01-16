@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFocus.View.LazyView.FinanceView"
+             xmlns:lazyview="clr-namespace:DailyFocus.Resources.Utilities"
+             xmlns:lazycontent="clr-namespace:DailyFocus.View">
+
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand">
+        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Finance"></lazyview:LazyView>
+    </Grid>
+</ContentPage>

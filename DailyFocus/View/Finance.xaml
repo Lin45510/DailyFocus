@@ -122,7 +122,7 @@
                 </Image>
                 <Image Source="next" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="End">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer />
+                        <TapGestureRecognizer/>
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>

@@ -4,10 +4,10 @@ namespace DailyFocus.View
 {
     public partial class Commitments : ContentPage
     {
-        public Commitments()
+        public Commitments(CommitmentsVM vm)
         {
             InitializeComponent();
-            BindingContext = new CommitmentsVM();
+            BindingContext = vm;
         }
     }
 }

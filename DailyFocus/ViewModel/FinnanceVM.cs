@@ -16,6 +16,7 @@ namespace DailyFocus.ViewModel
     {
         private readonly FinanceModel _model = new();
 
+
         #region Observable Properties
 
         [ObservableProperty]
@@ -37,7 +38,7 @@ namespace DailyFocus.ViewModel
 
         #region Functions
 
-        private async Task LoadFinances()
+        public async Task LoadFinances()
         {
             Finances = await _model.GroupFinancesByDateTime();
         }
@@ -45,7 +46,7 @@ namespace DailyFocus.ViewModel
         [RelayCommand]
         public async Task NewFinance()
         {
-            await Shell.Current.Navigation.PushAsync(new NewFinance());
+            await Shell.Current.Navigation.PushAsync(new NewFinance(new() { finnanceVM = this }));
         }
 
         [RelayCommand]

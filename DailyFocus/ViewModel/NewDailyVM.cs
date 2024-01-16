@@ -16,7 +16,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DailyFocus.ViewModel
 {
-    partial class NewDailyVM : ObservableObject
+    public partial class NewDailyVM : ObservableObject
     {
 
         private readonly CommitmentsModel _model = new();

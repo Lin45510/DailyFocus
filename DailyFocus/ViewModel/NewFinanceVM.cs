@@ -16,6 +16,8 @@ namespace DailyFocus.ViewModel
 
         private string Month = DateTime.Now.ToString("MMMM", new CultureInfo("pt-BR"));
 
+        public FinnanceVM finnanceVM = new();
+
         #region ObservableProperties
 
         [ObservableProperty]
@@ -68,6 +70,8 @@ namespace DailyFocus.ViewModel
                 DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
             FinanceType = 0;
             FinanceValue = 0.0;
+
+            finnanceVM.Finances = await _model.GroupFinancesByDateTime();
         }
 
         #endregion

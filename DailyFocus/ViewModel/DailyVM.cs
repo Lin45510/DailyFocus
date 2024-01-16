@@ -47,7 +47,7 @@ namespace DailyFocus.ViewModel
         [RelayCommand]
         async Task NewDaily()
         {
-            await Shell.Current.Navigation.PushAsync(new NewDaily());
+            await Shell.Current.Navigation.PushAsync(new NewDaily(new()));
         }
 
         #endregion
