@@ -3,9 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyFocus.View.LazyView.FinanceView"
              xmlns:lazyview="clr-namespace:DailyFocus.Resources.Utilities"
-             xmlns:lazycontent="clr-namespace:DailyFocus.View">
+             xmlns:lazycontent="clr-namespace:DailyFocus.View"
+             xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
+             BackgroundColor="{DynamicResource BackGround}">
 
-    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="EndAndExpand">
-        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Finance"></lazyview:LazyView>
+    <ContentPage.BindingContext>
+        <viewmodel:FinnanceVM/>
+    </ContentPage.BindingContext>
+
+    <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Finance" BindingContext="{viewmodel:FinnanceVM}"/>
     </Grid>
+
+
 </ContentPage>

@@ -10,6 +10,6 @@
     <TabBar Shell.TabBarBackgroundColor="#1D1A21" Shell.TabBarTitleColor="{DynamicResource Primary}" Shell.TabBarUnselectedColor="{DynamicResource Unselected}">
         <ShellContent Icon="calendar" ContentTemplate="{DataTemplate views:Commitments }"/>
         <ShellContent Icon="daily" ContentTemplate="{DataTemplate views:Daily }"/>
-        <ShellContent Icon="bank" ContentTemplate="{DataTemplate views:Finance }"/>
+        <ShellContent Icon="bank" ContentTemplate="{DataTemplate lazyview:FinanceView }"/>
     </TabBar>
 </Shell>

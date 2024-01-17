@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyFocus.View.Finance"
              xmlns:controls="clr-namespace:Plugin.Maui.Calendar.Controls;assembly=Plugin.Maui.Calendar"
@@ -7,11 +7,11 @@
              xmlns:local="clr-namespace:DailyFocus.Resources.DataTemplateSelectors"
              BackgroundColor="{DynamicResource BackGround}">
 
-    <ContentPage.BindingContext>
+    <ContentView.BindingContext>
         <viewmodel:FinnanceVM/>
-    </ContentPage.BindingContext>
+    </ContentView.BindingContext>
 
-    <ContentPage.Resources>
+    <ContentView.Resources>
 
         <!--#region Carrousel Templates-->
 
@@ -91,7 +91,7 @@
                                            DataTemplateBillsToReceive="{StaticResource BillsToReceive}"
                                            DataTemplatePaidBills="{StaticResource PaidBills}"/>
 
-    </ContentPage.Resources>
+    </ContentView.Resources>
 
     <Grid Margin="10">
         <Grid RowDefinitions="auto,auto,auto, *" RowSpacing="10">
@@ -128,4 +128,4 @@
             </Grid>
         </Grid>
     </Grid>
-</ContentPage>
+</ContentView>

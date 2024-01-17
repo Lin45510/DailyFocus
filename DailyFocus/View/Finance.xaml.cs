@@ -2,7 +2,7 @@ using DailyFocus.ViewModel;
 
 namespace DailyFocus.View;
 
-public partial class Finance : ContentPage
+public partial class Finance : ContentView
 {
     public Finance()
     {
