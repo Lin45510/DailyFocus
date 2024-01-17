@@ -3,12 +3,12 @@ using DailyFocus.ViewModel;
 
 namespace DailyFocus.View
 {
-    public partial class Daily : ContentPage
+    public partial class Daily : ContentView
     {
-        public Daily(DailyVM vm)
+        public Daily()
         {
             InitializeComponent();
-            BindingContext = vm;
+            BindingContext = new DailyVM();
         }
     }
 }

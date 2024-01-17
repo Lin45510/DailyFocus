@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using DailyFocus.Model;
 using DailyFocus.View;
+using DailyFocus.View.LazyView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,7 +48,7 @@ namespace DailyFocus.ViewModel
         [RelayCommand]
         async Task NewDaily()
         {
-            await Shell.Current.Navigation.PushAsync(new NewDaily(new()));
+            await Shell.Current.Navigation.PushAsync(new NewDailyView());
         }
 
         #endregion

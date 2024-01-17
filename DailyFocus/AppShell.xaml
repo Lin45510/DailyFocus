@@ -8,8 +8,8 @@
     xmlns:lazyview="clr-namespace:DailyFocus.View.LazyView">
 
     <TabBar Shell.TabBarBackgroundColor="#1D1A21" Shell.TabBarTitleColor="{DynamicResource Primary}" Shell.TabBarUnselectedColor="{DynamicResource Unselected}">
-        <ShellContent Icon="calendar" ContentTemplate="{DataTemplate views:Commitments }"/>
-        <ShellContent Icon="daily" ContentTemplate="{DataTemplate views:Daily }"/>
+        <ShellContent Icon="calendar" ContentTemplate="{DataTemplate lazyview:CommitmentsView }"/>
+        <ShellContent Icon="daily" ContentTemplate="{DataTemplate lazyview:DailyView }"/>
         <ShellContent Icon="bank" ContentTemplate="{DataTemplate lazyview:FinanceView }"/>
     </TabBar>
 </Shell>

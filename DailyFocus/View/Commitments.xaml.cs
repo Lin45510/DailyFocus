@@ -2,12 +2,12 @@ using DailyFocus.ViewModel;
 
 namespace DailyFocus.View
 {
-    public partial class Commitments : ContentPage
+    public partial class Commitments : ContentView
     {
-        public Commitments(CommitmentsVM vm)
+        public Commitments()
         {
             InitializeComponent();
-            BindingContext = vm;
+            BindingContext = new CommitmentsVM();
         }
     }
 }

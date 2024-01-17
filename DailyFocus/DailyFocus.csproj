@@ -82,6 +82,15 @@
 		<MauiXaml Update="View\Finance.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="View\LazyView\CommitmentsView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\LazyView\DailyView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="View\LazyView\NewDailyView.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 		<MauiXaml Update="View\NewCommitment.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
@@ -94,10 +103,6 @@
 		<MauiXaml Update="View\PopUp\CommitmentPopup.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="View\LazyView\" />
 	</ItemGroup>
 
 </Project>

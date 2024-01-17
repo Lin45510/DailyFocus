@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyFocus.View.Commitments"
              xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
@@ -10,13 +10,13 @@
              xmlns:drawable="clr-namespace:DailyFocus.Resources.Drawable"
              BackgroundColor="{DynamicResource BackGround}">
 
-    <ContentPage.BindingContext>
+    <ContentView.BindingContext>
         <viewmodel:CommitmentsVM/>
-    </ContentPage.BindingContext>
+    </ContentView.BindingContext>
 
-    <ContentPage.Resources>
+    <ContentView.Resources>
         <drawable:Line x:Key="Drawable"/>
-    </ContentPage.Resources>
+    </ContentView.Resources>
 
     <Grid Margin="10">
         <Grid RowDefinitions="auto, auto, *" RowSpacing="7">
@@ -58,4 +58,4 @@
             </CollectionView>
         </Grid>
     </Grid>
-</ContentPage>
+</ContentView>
