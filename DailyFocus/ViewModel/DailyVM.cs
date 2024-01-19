@@ -21,6 +21,9 @@ namespace DailyFocus.ViewModel
         [ObservableProperty]
         ObservableCollection<CommitmentsModel> commitments;
 
+        [ObservableProperty]
+        ShellVM shellVM;
+
         #endregion
 
         public DailyVM()
@@ -48,7 +51,7 @@ namespace DailyFocus.ViewModel
         [RelayCommand]
         async Task NewDaily()
         {
-            await Shell.Current.Navigation.PushAsync(new NewDailyView());
+            await Shell.Current.Navigation.PushAsync(new NewDailyView() { newDailyVM = new() { ShellVM = ShellVM } });
         }
 
         #endregion

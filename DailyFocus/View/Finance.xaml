@@ -24,7 +24,7 @@
                            VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <CollectionView ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FinnanceVM}}, Path=Finances}">
+                    <CollectionView ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FinnanceVM}}, Path=Billstopay}">
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <VerticalStackLayout>
@@ -76,7 +76,49 @@
             <Grid RowDefinitions="auto, *">
                 <Grid HeightRequest="40">
                     <Label Text="À Receber" FontSize="17"
-                           VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <CollectionView ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FinnanceVM}}, Path=Billstoreceive}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout>
+                                    <Grid ColumnDefinitions="auto, *" VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand" Margin="0,10,0,0">
+                                        <CheckBox IsChecked="{Binding Status}">
+                                            <CheckBox.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FinnanceVM}}, Path=CheckCommand}"
+                                                          CommandParameter="{Binding}"/>
+                                            </CheckBox.GestureRecognizers>
+                                        </CheckBox>
+                                        <Grid Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                            <Border BackgroundColor="{DynamicResource Secondary}" Stroke="Transparent">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="30"/>
+                                                </Border.StrokeShape>
+                                            </Border>
+                                            <Grid RowDefinitions="auto, auto">
+                                                <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand"/>
+                                                <FlexLayout Grid.Row="1" JustifyContent="SpaceAround">
+                                                    <VerticalStackLayout>
+                                                        <Label Text="Valor" FontSize="20"/>
+                                                        <HorizontalStackLayout Spacing="10">
+                                                            <Label Text="R$" FontSize="17"/>
+                                                            <Label Text="{Binding Value}" FontSize="17"/>
+                                                        </HorizontalStackLayout>
+                                                    </VerticalStackLayout>
+                                                    <VerticalStackLayout>
+                                                        <Label Text="Vencimento" FontSize="20"/>
+                                                        <Label Text="{Binding Date}" FontSize="17"/>
+                                                    </VerticalStackLayout>
+                                                </FlexLayout>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
             </Grid>
         </DataTemplate>
@@ -86,10 +128,8 @@
         <!--#endregion-->
 
         <local:NewDailyDataTemplateSeletor x:Key="carrouselTemplate"
-                                           DataTemplateAllBills="{StaticResource AllBills}"
                                            DataTemplateBillsToPay="{StaticResource BillsToPay}"
-                                           DataTemplateBillsToReceive="{StaticResource BillsToReceive}"
-                                           DataTemplatePaidBills="{StaticResource PaidBills}"/>
+                                           DataTemplateBillsToReceive="{StaticResource BillsToReceive}"/>
 
     </ContentView.Resources>
 
@@ -114,15 +154,18 @@
                     Command="{Binding NewFinanceCommand}"/>
             <Label Text="Despesas" FontSize="30" HorizontalOptions="CenterAndExpand" Grid.Row="2"/>
             <Grid Grid.Row="3">
-                <CarouselView ItemsSource="{Binding CarrouselTemplates}" ItemTemplate="{StaticResource carrouselTemplate}"/>
+                <CarouselView x:Name="Carouselview" Grid.Row="1" VerticalOptions="EndAndExpand" IsSwipeEnabled="False" 
+                    ItemsSource="{Binding CarrouselTemplates}" ItemTemplate="{StaticResource carrouselTemplate}"/>
                 <Image Source="previous" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer/>
+                        <TapGestureRecognizer Command="{Binding CarousellScrollPreviousCommand}"
+                                              CommandParameter="{x:Reference Carouselview}"/>
                     </Image.GestureRecognizers>
                 </Image>
                 <Image Source="next" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="End">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer/>
+                        <TapGestureRecognizer Command="{Binding CarousellScrollNextCommand}"
+                                              CommandParameter="{x:Reference Carouselview}"/>
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>

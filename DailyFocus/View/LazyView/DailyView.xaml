@@ -8,6 +8,6 @@
              BackgroundColor="{DynamicResource BackGround}">
 
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Daily" BindingContext="{viewmodel:DailyVM}"/>
+        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Daily"/>
     </Grid>
 </ContentPage>

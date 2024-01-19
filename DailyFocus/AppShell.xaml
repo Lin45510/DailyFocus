@@ -5,11 +5,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DailyFocus"
     xmlns:views="clr-namespace:DailyFocus.View"
-    xmlns:lazyview="clr-namespace:DailyFocus.View.LazyView">
+    xmlns:lazyview="clr-namespace:DailyFocus.View.LazyView"
+    xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel">
+
+    <Shell.BindingContext>
+        <viewmodel:ShellVM/>
+    </Shell.BindingContext>
 
     <TabBar Shell.TabBarBackgroundColor="#1D1A21" Shell.TabBarTitleColor="{DynamicResource Primary}" Shell.TabBarUnselectedColor="{DynamicResource Unselected}">
-        <ShellContent Icon="calendar" ContentTemplate="{DataTemplate lazyview:CommitmentsView }"/>
-        <ShellContent Icon="daily" ContentTemplate="{DataTemplate lazyview:DailyView }"/>
-        <ShellContent Icon="bank" ContentTemplate="{DataTemplate lazyview:FinanceView }"/>
+
+        <ShellContent Icon="calendar" Content="{Binding CommitmentsView}"/>
+        <ShellContent Icon="daily" Content="{ Binding DailyView }"/>
+        <ShellContent Icon="bank" Content="{Binding FinanceView }"/>
+
     </TabBar>
 </Shell>

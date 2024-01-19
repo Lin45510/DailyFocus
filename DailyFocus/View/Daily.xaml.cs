@@ -8,7 +8,6 @@ namespace DailyFocus.View
         public Daily()
         {
             InitializeComponent();
-            BindingContext = new DailyVM();
         }
     }
 }

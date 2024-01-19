@@ -64,6 +64,26 @@ namespace DailyFocus.Model
 
             return financesOnDate;
         }
+        public async Task<ObservableCollection<FinanceModel>> GetFinancesbyType(int Type = -1)
+        {
+            ObservableCollection<FinanceModel> financesByType = new();
+            List<FinanceModel> finances = new();
+
+            List<FinanceModel> finList = await financeDAO.GetItemsAsync();
+
+            finances = Type switch
+            {
+                0 => finList.Where(x => x.Type == 0).ToList(),
+                1 => finList.Where(x => x.Type == 1).ToList(),
+                _ => finList,
+            };
+            foreach (FinanceModel finance in finances)
+            {
+                financesByType.Add(finance);
+            }
+
+            return financesByType;
+        }
 
         public async Task Save(FinanceModel finance)
         {

@@ -71,7 +71,8 @@ namespace DailyFocus.ViewModel
             FinanceType = 0;
             FinanceValue = 0.0;
 
-            finnanceVM.Finances = await _model.GroupFinancesByDateTime();
+            finnanceVM.Billstopay = await _model.GetFinancesbyType(0);
+            finnanceVM.Billstoreceive = await _model.GetFinancesbyType(1);
         }
 
         #endregion

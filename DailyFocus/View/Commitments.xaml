@@ -10,9 +10,9 @@
              xmlns:drawable="clr-namespace:DailyFocus.Resources.Drawable"
              BackgroundColor="{DynamicResource BackGround}">
 
-    <ContentView.BindingContext>
+    <!--<ContentView.BindingContext>
         <viewmodel:CommitmentsVM/>
-    </ContentView.BindingContext>
+    </ContentView.BindingContext>-->
 
     <ContentView.Resources>
         <drawable:Line x:Key="Drawable"/>

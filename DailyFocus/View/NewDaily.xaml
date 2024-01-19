@@ -118,18 +118,18 @@
             <calendar:Calendar FooterSectionVisible="False" SelectedDate="{Binding SelectedDate}"
                                DayTappedCommand="{Binding ChangeDayCommand}"/>
         </Grid>
-        <CarouselView x:Name="Carouselview" Grid.Row="1" VerticalOptions="EndAndExpand" IndicatorView="indicatorView" IsSwipeEnabled="False" 
+        <CarouselView x:Name="Carouselview" Grid.Row="1" VerticalOptions="EndAndExpand" IsSwipeEnabled="False" 
                       ItemsSource="{Binding CarrouselTemplates}" ItemTemplate="{StaticResource carrouselTemplate}"/>
 
         <Image Source="previous" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start">
             <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding carrousellScrollPreviousCommand}"
+                <TapGestureRecognizer Command="{Binding CarousellScrollPreviousCommand}"
                                       CommandParameter="{x:Reference Carouselview}"/>
             </Image.GestureRecognizers>
         </Image>
         <Image Source="next" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="End">
             <Image.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding carrousellScrollNextCommand}"
+                <TapGestureRecognizer Command="{Binding CarousellScrollNextCommand}"
                                       CommandParameter="{x:Reference Carouselview}"/>
             </Image.GestureRecognizers>
         </Image>

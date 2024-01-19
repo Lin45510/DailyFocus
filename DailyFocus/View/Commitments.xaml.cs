@@ -7,7 +7,6 @@ namespace DailyFocus.View
         public Commitments()
         {
             InitializeComponent();
-            BindingContext = new CommitmentsVM();
         }
     }
 }

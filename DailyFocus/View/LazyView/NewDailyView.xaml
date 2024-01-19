@@ -9,6 +9,10 @@
              Shell.BackgroundColor="{DynamicResource BackGround}"
              BackgroundColor="{DynamicResource BackGround}">
 
+    <ContentPage.BindingContext>
+        <viewmdoel:NewDailyVM/>
+    </ContentPage.BindingContext>
+
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:NewDaily" BindingContext="{viewmdoel:NewDailyVM}"/>
     </Grid>

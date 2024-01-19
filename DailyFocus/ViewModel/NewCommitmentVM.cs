@@ -21,7 +21,7 @@ namespace DailyFocus.ViewModel
     {
         public string date;
         public bool status;
-        public CommitmentsVM commitmentsVM;
+        public ShellVM shellVM;
         private readonly CommitmentsDAO commitmentsDAO = new();
 
         #region Observable Properties
@@ -82,14 +82,16 @@ namespace DailyFocus.ViewModel
                 Starttime = new(12, 00, 00);
                 Endtime = new(12, 00, 00);
                 Local = "";
+
+                CommitmentsModel commitmentsModel = new();
+                shellVM.CommitmentsView.commitmentsVM.Commitments = await commitmentsModel.GroupCommitmentsbyDate();
+                shellVM.DailyView.dailyVM.Commitments = await commitmentsModel.GroupCommitmentsbyDateTime();
             }
         }
 
         [RelayCommand]
         public async Task Cancel()
         {
-            CommitmentsModel commitmentsModel = new();
-            commitmentsVM.Commitments = await commitmentsModel.GroupCommitmentsbyDate();
             await Shell.Current.Navigation.PopAsync();
         }
 

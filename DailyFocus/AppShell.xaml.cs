@@ -7,7 +7,6 @@ namespace DailyFocus
         public AppShell()
         {
             InitializeComponent();
-
         }
     }
 }

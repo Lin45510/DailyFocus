@@ -19,6 +19,6 @@ namespace DailyFocus.DataBase
             SQLite.SQLiteOpenFlags.SharedCache;
 
         public static string DatabasePath =>
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), DatabaseFilename);
+            Path.Combine(FileSystem.AppDataDirectory, DatabaseFilename);
     }
 }

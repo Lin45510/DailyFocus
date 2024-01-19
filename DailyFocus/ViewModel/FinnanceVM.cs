@@ -27,7 +27,10 @@ namespace DailyFocus.ViewModel
         };
 
         [ObservableProperty]
-        ObservableCollection<FinanceModel> finances = new();
+        ObservableCollection<FinanceModel> billstopay = new();
+
+        [ObservableProperty]
+        ObservableCollection<FinanceModel> billstoreceive = new();
 
         #endregion
 
@@ -40,7 +43,8 @@ namespace DailyFocus.ViewModel
 
         public async Task LoadFinances()
         {
-            Finances = await _model.GroupFinancesByDateTime();
+            Billstopay = await _model.GetFinancesbyType(0);
+            Billstoreceive = await _model.GetFinancesbyType(1);
         }
 
         [RelayCommand]
@@ -56,7 +60,24 @@ namespace DailyFocus.ViewModel
 
             await _model.Edit(finance);
 
-            Finances = await _model.GroupFinancesByDateTime();
+            Billstopay = await _model.GetFinancesbyType(0);
+            Billstoreceive = await _model.GetFinancesbyType(1);
+        }
+
+        [RelayCommand]
+        public void CarousellScrollNext(CarouselView carousel)
+        {
+            int position = carousel.Position + 1;
+
+            carousel.ScrollTo(position, 0);
+        }
+
+        [RelayCommand]
+        public void CarousellScrollPrevious(CarouselView carousel)
+        {
+            int position = carousel.Position - 1;
+
+            carousel.ScrollTo(position, 0);
         }
 
         #endregion

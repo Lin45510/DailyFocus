@@ -7,11 +7,7 @@
              xmlns:lazycontent="clr-namespace:DailyFocus.View"
              BackgroundColor="{DynamicResource BackGround}">
 
-    <ContentPage.BindingContext>
-        <viewmodel:CommitmentsVM/>
-    </ContentPage.BindingContext>
-
     <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Commitments" BindingContext="{viewmodel:CommitmentsVM}"/>
+        <lazyview:LazyView x:Name="lazy" x:TypeArguments="lazycontent:Commitments"/>
     </Grid>
 </ContentPage>

@@ -21,6 +21,8 @@ namespace DailyFocus.ViewModel
     {
         private readonly CommitmentsModel _model = new();
         public IPopupService popupservice;
+        public CultureInfo Culture => new CultureInfo("pt-BR");
+
 
         #region Obervable Properties
 
@@ -30,10 +32,11 @@ namespace DailyFocus.ViewModel
         [ObservableProperty]
         string text;
 
-        public CultureInfo Culture => new("pt-BR");
-
         [ObservableProperty]
         ObservableCollection<CommitmentsModel> commitments;
+
+        [ObservableProperty]
+        ShellVM shellVM;
 
         #endregion
 
@@ -47,7 +50,7 @@ namespace DailyFocus.ViewModel
         [RelayCommand]
         async Task NewCommit()
         {
-            await Shell.Current.Navigation.PushAsync(new NewCommitment(new() { date = SelectedDate.ToString("dd/MM/yyyy"), commitmentsVM = this }));
+            await Shell.Current.Navigation.PushAsync(new NewCommitment(new() { date = SelectedDate.ToString("dd/MM/yyyy"), shellVM = ShellVM }));
         }
 
         [RelayCommand]
@@ -61,7 +64,7 @@ namespace DailyFocus.ViewModel
         {
             CommitmentsModel Commit = await _model.GetCommitment(id);
 
-            Popup popup = new CommitmentPopup(new() { Commitment = Commit, CommitmentsVM = this });
+            Popup popup = new CommitmentPopup(new() { Commitment = Commit, ShellVM = ShellVM });
 
             Shell.Current.CurrentPage.ShowPopup(popup);
         }

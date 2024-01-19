@@ -24,6 +24,9 @@ namespace DailyFocus.ViewModel
         #region Observable Properties
 
         [ObservableProperty]
+        ShellVM shellVM;
+
+        [ObservableProperty]
         ObservableCollection<CommitmentsModel> commitments;
 
         [ObservableProperty]
@@ -59,6 +62,7 @@ namespace DailyFocus.ViewModel
             endTime = new TimeSpan(12, 00, 00);
 
             Task.Run(async () => { await LoadCommitments(); }).GetAwaiter().GetResult();
+
         }
 
         #region Commands
@@ -76,7 +80,7 @@ namespace DailyFocus.ViewModel
         }
 
         [RelayCommand]
-        public void carrousellScrollNext(CarouselView carousel)
+        public void CarousellScrollNext(CarouselView carousel)
         {
             int position = carousel.Position + 1;
 
@@ -84,7 +88,7 @@ namespace DailyFocus.ViewModel
         }
 
         [RelayCommand]
-        public void carrousellScrollPrevious(CarouselView carousel)
+        public void CarousellScrollPrevious(CarouselView carousel)
         {
             int position = carousel.Position - 1;
 
@@ -119,6 +123,9 @@ namespace DailyFocus.ViewModel
                 Local = "";
 
                 await LoadCommitments();
+
+                ShellVM.DailyView.dailyVM.Commitments = await _model.GroupCommitmentsbyDateTime();
+                ShellVM.CommitmentsView.commitmentsVM.Commitments = await _model.GroupCommitmentsbyDate();
             }
         }
 

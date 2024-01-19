@@ -170,7 +170,7 @@ namespace DailyFocus.Model
             await commitmentsDAO.SaveItemAsync(commitment);
         }
 
-        public async Task EditPopUp(CommitmentsModel commitments, CommitmentsVM commitmentsVM)
+        public async Task EditPopUp(CommitmentsModel commitments, ShellVM shellVM)
         {
             bool time = !(commitments.StartTime == "" || commitments.EndTime == "");
             await Shell.Current.Navigation.PushAsync(new NewCommitment(new()
@@ -183,7 +183,7 @@ namespace DailyFocus.Model
                 Time = time,
                 Starttime = time ? TimeSpan.Parse(commitments.StartTime) : new TimeSpan(12, 0, 0),
                 Endtime = time ? TimeSpan.Parse(commitments.EndTime) : new TimeSpan(12, 0, 0),
-                commitmentsVM = commitmentsVM
+                shellVM = shellVM
             }));
         }
 
