@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DailyFocus.Model;
 using DailyFocus.View;
 using DailyFocus.View.LazyView;
+using DailyFocus.View.PopUp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -52,6 +54,16 @@ namespace DailyFocus.ViewModel
         async Task NewDaily()
         {
             await Shell.Current.Navigation.PushAsync(new NewDailyView() { newDailyVM = new() { ShellVM = ShellVM } });
+        }
+
+        [RelayCommand]
+        async Task CommitDataPopup(int id)
+        {
+            CommitmentsModel Commit = await _model.GetCommitment(id);
+
+            Popup popup = new CommitmentPopup(new() { Commitment = Commit, ShellVM = ShellVM });
+
+            Shell.Current.CurrentPage.ShowPopup(popup);
         }
 
         #endregion

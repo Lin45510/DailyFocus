@@ -5,9 +5,9 @@
              xmlns:viewmodel="clr-namespace:DailyFocus.ViewModel"
              BackgroundColor="{DynamicResource BackGround}">
 
-    <!--<ContentView.BindingContext>
+    <ContentView.BindingContext>
         <viewmodel:DailyVM/>
-    </ContentView.BindingContext>-->
+    </ContentView.BindingContext>
 
     <VerticalStackLayout Margin="10">
         <Button ImageSource="plus" HeightRequest="45" WidthRequest="45" Command="{Binding NewDailyCommand}"/>
@@ -39,7 +39,12 @@
                                                     <RoundRectangle CornerRadius="15"/>
                                                 </Border.StrokeShape>
                                             </Border>
-                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:DailyVM}}, Path=CommitDataPopupCommand}"
+                                                                          CommandParameter="{Binding Id}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>

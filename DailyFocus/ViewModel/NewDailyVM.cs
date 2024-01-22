@@ -1,7 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DailyFocus.Model;
 using DailyFocus.Resources.DataTemplateSelectors;
+using DailyFocus.View.PopUp;
 using Microsoft.Maui.Controls.Internals;
 using Microsoft.Maui.Media;
 using System;
@@ -127,6 +129,16 @@ namespace DailyFocus.ViewModel
                 ShellVM.DailyView.dailyVM.Commitments = await _model.GroupCommitmentsbyDateTime();
                 ShellVM.CommitmentsView.commitmentsVM.Commitments = await _model.GroupCommitmentsbyDate();
             }
+        }
+
+        [RelayCommand]
+        async Task CommitDataPopup(int id)
+        {
+            CommitmentsModel Commit = await _model.GetCommitment(id);
+
+            Popup popup = new CommitmentPopup(new() { Commitment = Commit, ShellVM = ShellVM });
+
+            Shell.Current.CurrentPage.ShowPopup(popup);
         }
 
         #endregion

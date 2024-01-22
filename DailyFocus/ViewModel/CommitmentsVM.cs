@@ -23,7 +23,6 @@ namespace DailyFocus.ViewModel
         public IPopupService popupservice;
         public CultureInfo Culture => new CultureInfo("pt-BR");
 
-
         #region Obervable Properties
 
         [ObservableProperty]

@@ -61,7 +61,12 @@
                                                     <RoundRectangle CornerRadius="15"/>
                                                 </Border.StrokeShape>
                                             </Border>
-                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                            <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                <Label.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path=CommitDataPopupCommand}"
+                                                                          CommandParameter="{Binding Id}"/>
+                                                </Label.GestureRecognizers>
+                                            </Label>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -90,7 +95,12 @@
                                             <RoundRectangle CornerRadius="15"/>
                                         </Border.StrokeShape>
                                     </Border>
-                                    <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Name}" FontSize="25" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:NewDailyVM}}, Path = CommitDataPopupCommand}"
+                                                                  CommandParameter="{Binding Id}"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
                                 </Grid>
                             </ScrollView>
                         </DataTemplate>
