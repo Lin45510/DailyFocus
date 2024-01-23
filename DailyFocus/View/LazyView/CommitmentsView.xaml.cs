@@ -6,7 +6,7 @@ namespace DailyFocus.View.LazyView;
 
 public partial class CommitmentsView : ContentPage
 {
-    public CommitmentsVM commitmentsVM { get; set; }
+    public CommitmentsVM CommitmentsVM { get; set; }
     public CommitmentsView()
     {
         InitializeComponent();
@@ -14,7 +14,7 @@ public partial class CommitmentsView : ContentPage
 
     protected override void OnAppearing()
     {
-        lazy.BindingContext = commitmentsVM;
+        lazy.BindingContext = CommitmentsVM;
         base.OnAppearing();
         Task.Run(
             async () =>

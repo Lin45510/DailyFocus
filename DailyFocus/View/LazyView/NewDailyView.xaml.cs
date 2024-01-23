@@ -5,7 +5,7 @@ namespace DailyFocus.View.LazyView;
 
 public partial class NewDailyView : ContentPage
 {
-    public NewDailyVM newDailyVM { get; set; }
+    public NewDailyVM NewDailyVM { get; set; }
     public NewDailyView()
     {
         InitializeComponent();
@@ -13,7 +13,7 @@ public partial class NewDailyView : ContentPage
 
     protected override void OnAppearing()
     {
-        lazy.BindingContext = newDailyVM;
+        lazy.BindingContext = NewDailyVM;
         base.OnAppearing();
         Task.Run(
             async () =>

@@ -32,6 +32,9 @@ namespace DailyFocus.ViewModel
         [ObservableProperty]
         ObservableCollection<FinanceModel> billstoreceive = new();
 
+        [ObservableProperty]
+        ShellVM shellVM;
+
         #endregion
 
         public FinnanceVM()

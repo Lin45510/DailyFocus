@@ -8,9 +8,9 @@
              Shell.BackgroundColor="{DynamicResource BackGround}"
              BackgroundColor="{DynamicResource BackGround}">
 
-    <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <viewmodel:NewCommitmentVM/>
-    </ContentPage.BindingContext>
+    </ContentPage.BindingContext>-->
 
     <Shell.BackButtonBehavior>
         <BackButtonBehavior Command="{Binding CancelCommand}"/>

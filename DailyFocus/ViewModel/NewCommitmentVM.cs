@@ -84,8 +84,10 @@ namespace DailyFocus.ViewModel
                 Local = "";
 
                 CommitmentsModel commitmentsModel = new();
-                shellVM.CommitmentsView.commitmentsVM.Commitments = await commitmentsModel.GroupCommitmentsbyDate();
-                shellVM.DailyView.dailyVM.Commitments = await commitmentsModel.GroupCommitmentsbyDateTime();
+                shellVM.CommitmentsView.CommitmentsVM.Commitments = await commitmentsModel.GroupCommitmentsbyDate();
+                shellVM.DailyView.DailyVM.Commitments = await commitmentsModel.GroupCommitmentsbyDateTime();
+                shellVM.NewDailyView.NewDailyVM.Commitments = await commitmentsModel.GetCommitmentsOnDate(shellVM.NewDailyView.NewDailyVM.SelectedDate.ToString("dd/MM/yyyy"));
+                shellVM.NewDailyView.NewDailyVM.NoTimeCommitments = await commitmentsModel.GetCommitmentsOnDate(shellVM.NewDailyView.NewDailyVM.SelectedDate.ToString("dd/MM/yyyy"), false);
             }
         }
 

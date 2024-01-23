@@ -10,7 +10,8 @@ namespace DailyFocus.ViewModel
 {
     public partial class ShellVM : ObservableObject
     {
-        #region
+        #region Observable Properties
+
         [ObservableProperty]
         CommitmentsView commitmentsView = new();
 
@@ -20,11 +21,16 @@ namespace DailyFocus.ViewModel
         [ObservableProperty]
         FinanceView financeView = new();
 
+        [ObservableProperty]
+        NewDailyView newDailyView = new();
+
         #endregion
         public ShellVM()
         {
-            commitmentsView.commitmentsVM = new() { ShellVM = this };
-            dailyView.dailyVM = new() { ShellVM = this };
+            commitmentsView.CommitmentsVM = new() { ShellVM = this };
+            dailyView.DailyVM = new() { ShellVM = this };
+            financeView.FinnanceVM = new() { ShellVM = this };
+            newDailyView.NewDailyVM = new() { ShellVM = this };
         }
     }
 }

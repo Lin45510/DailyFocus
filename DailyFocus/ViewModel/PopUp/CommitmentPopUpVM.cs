@@ -16,11 +16,15 @@ namespace DailyFocus.ViewModel.PopUp
         private readonly CommitmentsModel _model = new();
 
         #region Observable Property
+
         [ObservableProperty]
         ShellVM shellVM;
 
         [ObservableProperty]
         CommitmentsModel commitment;
+
+        [ObservableProperty]
+        NewDailyVM newDailyVM = null;
 
         #endregion
 
@@ -32,8 +36,16 @@ namespace DailyFocus.ViewModel.PopUp
         async Task Delete(Popup popup)
         {
             await _model.Delete(Commitment);
-            ShellVM.CommitmentsView.commitmentsVM.Commitments = await _model.GroupCommitmentsbyDate();
-            ShellVM.DailyView.dailyVM.Commitments = await _model.GroupCommitmentsbyDateTime();
+            ShellVM.CommitmentsView.CommitmentsVM.Commitments = await _model.GroupCommitmentsbyDate();
+            ShellVM.DailyView.DailyVM.Commitments = await _model.GroupCommitmentsbyDateTime();
+
+            ShellVM.NewDailyView.NewDailyVM.SelectedDate = DateTime.Now.AddDays(1);
+
+            if (NewDailyVM != null)
+            {
+                NewDailyVM.Commitments = await _model.GetCommitmentsOnDate(Commitment.Date);
+                NewDailyVM.NoTimeCommitments = await _model.GetCommitmentsOnDate(Commitment.Date, false);
+            }
             popup.Close();
         }
         [RelayCommand]

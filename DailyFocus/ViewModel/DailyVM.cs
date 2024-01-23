@@ -53,7 +53,7 @@ namespace DailyFocus.ViewModel
         [RelayCommand]
         async Task NewDaily()
         {
-            await Shell.Current.Navigation.PushAsync(new NewDailyView() { newDailyVM = new() { ShellVM = ShellVM } });
+            await Shell.Current.Navigation.PushAsync(ShellVM.NewDailyView);
         }
 
         [RelayCommand]

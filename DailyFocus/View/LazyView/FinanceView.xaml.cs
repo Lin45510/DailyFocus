@@ -4,6 +4,7 @@ namespace DailyFocus.View.LazyView;
 
 public partial class FinanceView : ContentPage
 {
+    public FinnanceVM FinnanceVM { get; set; }
     public FinanceView()
     {
         InitializeComponent();
@@ -11,6 +12,7 @@ public partial class FinanceView : ContentPage
 
     protected override void OnAppearing()
     {
+        lazy.BindingContext = FinnanceVM;
         base.OnAppearing();
         Task.Run(
             async () =>

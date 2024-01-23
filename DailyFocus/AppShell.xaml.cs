@@ -1,5 +1,4 @@
-﻿using DailyFocus.View;
-
+﻿using DailyFocus.ViewModel;
 namespace DailyFocus
 {
     public partial class AppShell : Shell

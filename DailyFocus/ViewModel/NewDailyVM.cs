@@ -126,8 +126,8 @@ namespace DailyFocus.ViewModel
 
                 await LoadCommitments();
 
-                ShellVM.DailyView.dailyVM.Commitments = await _model.GroupCommitmentsbyDateTime();
-                ShellVM.CommitmentsView.commitmentsVM.Commitments = await _model.GroupCommitmentsbyDate();
+                ShellVM.DailyView.DailyVM.Commitments = await _model.GroupCommitmentsbyDateTime();
+                ShellVM.CommitmentsView.CommitmentsVM.Commitments = await _model.GroupCommitmentsbyDate();
             }
         }
 
@@ -136,7 +136,7 @@ namespace DailyFocus.ViewModel
         {
             CommitmentsModel Commit = await _model.GetCommitment(id);
 
-            Popup popup = new CommitmentPopup(new() { Commitment = Commit, ShellVM = ShellVM });
+            Popup popup = new CommitmentPopup(new() { Commitment = Commit, ShellVM = ShellVM, NewDailyVM = this });
 
             Shell.Current.CurrentPage.ShowPopup(popup);
         }
