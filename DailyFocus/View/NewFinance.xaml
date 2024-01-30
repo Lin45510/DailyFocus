@@ -32,7 +32,7 @@
                 Grid.Row="2" VerticalOptions="CenterAndExpand"/>
         </HorizontalStackLayout>
         <StackLayout Grid.Row="3" Orientation="Horizontal" Spacing="50" HorizontalOptions="Center" VerticalOptions="EndAndExpand">
-            <Button Text="Cancelar" TextColor="White" BackgroundColor="{DynamicResource Secondary}"/>
+            <Button Text="Cancelar" TextColor="White" BackgroundColor="{DynamicResource Secondary}" Command="{Binding CancelCommand}"/>
             <Button Text="Adicionar" Command="{Binding SaveFinanceCommand}"/>
         </StackLayout>
     </Grid>

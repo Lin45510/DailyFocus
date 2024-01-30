@@ -1,8 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DailyFocus.Model;
 using DailyFocus.Resources.DataTemplateSelectors;
 using DailyFocus.View;
+using DailyFocus.View.PopUp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,22 +17,34 @@ namespace DailyFocus.ViewModel
     public partial class FinnanceVM : ObservableObject
     {
         private readonly FinanceModel _model = new();
+        private readonly SaldoModel _saldoModel = new();
 
 
         #region Observable Properties
 
         [ObservableProperty]
-        List<DataSelectorProperties> carrouselTemplates = new()
-        {
-            new DataSelectorProperties(){Type = "BillsToPay"},
-            new DataSelectorProperties(){Type = "BillsToReceive"},
-        };
+        List<DataSelectorProperties> carrouselTemplates =
+        [
+            new DataSelectorProperties() { Type = "BillsToPay" },
+            new DataSelectorProperties() { Type = "BillsToReceive" },
+            new DataSelectorProperties() { Type = "FinanceEntry" },
+            new DataSelectorProperties() { Type = "FinanceLoss" },
+        ];
 
         [ObservableProperty]
-        ObservableCollection<FinanceModel> billstopay = new();
+        ObservableCollection<FinanceModel> billstopay = [];
 
         [ObservableProperty]
-        ObservableCollection<FinanceModel> billstoreceive = new();
+        ObservableCollection<FinanceModel> billstoreceive = [];
+
+        [ObservableProperty]
+        ObservableCollection<FinanceModel> financeentry = [];
+
+        [ObservableProperty]
+        ObservableCollection<FinanceModel> financeloss = [];
+
+        [ObservableProperty]
+        SaldoModel saldo;
 
         [ObservableProperty]
         ShellVM shellVM;
@@ -46,14 +60,18 @@ namespace DailyFocus.ViewModel
 
         public async Task LoadFinances()
         {
-            Billstopay = await _model.GetFinancesbyType(0);
-            Billstoreceive = await _model.GetFinancesbyType(1);
+            Billstopay = await _model.GroupFinancesbyMonth(0);
+            Billstoreceive = await _model.GroupFinancesbyMonth(1);
+            Financeentry = await _model.GroupFinancesbyMonth(2);
+            Financeloss = await _model.GroupFinancesbyMonth(3);
+
+            Saldo = await _saldoModel.GetSaldo();
         }
 
         [RelayCommand]
         public async Task NewFinance()
         {
-            await Shell.Current.Navigation.PushAsync(new NewFinance(new() { finnanceVM = this }));
+            await Shell.Current.Navigation.PushAsync(new NewFinance(new() { shellVM = ShellVM }));
         }
 
         [RelayCommand]
@@ -81,6 +99,16 @@ namespace DailyFocus.ViewModel
             int position = carousel.Position - 1;
 
             carousel.ScrollTo(position, 0);
+        }
+
+        [RelayCommand]
+        async Task FinanceDataPopup(FinanceModel fin)
+        {
+            //FinanceModel finance = await _model.GetFinance(fin.Id);
+
+            Popup popup = new FinancePopup(new() { ShellVM = ShellVM, Finance = fin });
+
+            await Shell.Current.CurrentPage.ShowPopupAsync(popup);
         }
 
         #endregion

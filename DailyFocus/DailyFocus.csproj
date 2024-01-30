@@ -103,6 +103,9 @@
 		<MauiXaml Update="View\PopUp\CommitmentPopup.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
+		<MauiXaml Update="View\PopUp\FinancePopup.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>
