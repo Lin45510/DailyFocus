@@ -20,6 +20,8 @@ namespace DailyFocus.ViewModel
     public partial class CommitmentsVM : ObservableObject
     {
         private readonly CommitmentsModel _model = new();
+        private readonly FinanceModel _financeModel = new();
+
         public IPopupService popupservice;
         public CultureInfo Culture => new CultureInfo("pt-BR");
 
@@ -27,6 +29,9 @@ namespace DailyFocus.ViewModel
 
         [ObservableProperty]
         DateTime selectedDate = DateTime.Now.Date;
+
+        [ObservableProperty]
+        DateTime minimunDate = DateTime.Now.Date;
 
         [ObservableProperty]
         string text;
@@ -42,9 +47,25 @@ namespace DailyFocus.ViewModel
         public CommitmentsVM()
         {
             Task.Run(async () => { await LoadCommitments(); }).GetAwaiter().GetResult();
+            Task.Run(async () => { await ClearApp(); }).GetAwaiter().GetResult();
         }
 
         #region Commands
+
+        [RelayCommand]
+        async Task ClearApp()
+        {
+            ObservableCollection<CommitmentsModel> commitments = await _model.GetCommitments();
+            ObservableCollection<FinanceModel> finances = await _financeModel.GetFinancesbyType();
+
+            foreach (CommitmentsModel commitment in commitments)
+            {
+                if (DateOnly.ParseExact(commitment.Date, "dd/MM/yyyy").CompareTo(DateOnly.FromDateTime(DateTime.Now)) < 0)
+                {
+                    await _model.Delete(commitment);
+                }
+            }
+        }
 
         [RelayCommand]
         async Task NewCommit()

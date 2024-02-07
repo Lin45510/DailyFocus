@@ -31,7 +31,7 @@ namespace DailyFocus.Model
         {
             List<SaldoModel> saldoList = await _saldoDAO.GetItemsAsync();
 
-            return saldoList.Count > 0 ? saldoList[0] : new() { Date = DateTime.Now, Saldo = 0.0 };
+            return saldoList.Count > 0 ? saldoList.Last() : new() { Date = DateTime.Now, Saldo = 0.0 };
         }
 
         public async Task<double> SaldoValue()

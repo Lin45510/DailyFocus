@@ -150,6 +150,19 @@ namespace DailyFocus.Model
 
             return CommitmentsOnDate;
         }
+        public async Task<ObservableCollection<CommitmentsModel>> GetCommitments()
+        {
+            List<CommitmentsModel> CommitmentsList = await commitmentsDAO.GetItemsAsync();
+
+            ObservableCollection<CommitmentsModel> Commitments = [];
+
+            foreach (CommitmentsModel commitment in CommitmentsList)
+            {
+                Commitments.Add(commitment);
+            }
+
+            return Commitments;
+        }
 
         public async Task<CommitmentsModel> GetCommitment(int id)
         {

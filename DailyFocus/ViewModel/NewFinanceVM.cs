@@ -94,8 +94,7 @@ namespace DailyFocus.ViewModel
 
                 shellVM.FinanceView.FinnanceVM.Billstopay = await _model.GroupFinancesbyMonth(0);
                 shellVM.FinanceView.FinnanceVM.Billstoreceive = await _model.GroupFinancesbyMonth(1);
-                shellVM.FinanceView.FinnanceVM.Financeentry = await _model.GroupFinancesbyMonth(2);
-                shellVM.FinanceView.FinnanceVM.Financeloss = await _model.GroupFinancesbyMonth(3);
+                shellVM.FinanceView.FinnanceVM.Statement = await _model.GroupFinancesbyMonth(4);
 
                 shellVM.FinanceView.FinnanceVM.Saldo = await _saldomodel.GetSaldo();
             }

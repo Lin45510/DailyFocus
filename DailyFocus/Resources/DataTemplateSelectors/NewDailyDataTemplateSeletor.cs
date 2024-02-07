@@ -18,8 +18,7 @@ namespace DailyFocus.Resources.DataTemplateSelectors
         public DataTemplate DataTemplateNoTime { get; set; }
         public DataTemplate DataTemplateBillsToPay { get; set; }
         public DataTemplate DataTemplateBillsToReceive { get; set; }
-        public DataTemplate DataTemplateFinanceEntry { get; set; }
-        public DataTemplate DataTemplateFinanceLost { get; set; }
+        public DataTemplate DataTemplateStatement { get; set; }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -43,11 +42,8 @@ namespace DailyFocus.Resources.DataTemplateSelectors
                 case "BillsToReceive":
                     dataTemplate = DataTemplateBillsToReceive;
                     break;
-                case "FinanceEntry":
-                    dataTemplate = DataTemplateFinanceEntry;
-                    break;
-                case "FinanceLoss":
-                    dataTemplate = DataTemplateFinanceLost;
+                case "Statement":
+                    dataTemplate = DataTemplateStatement;
                     break;
             }
             return dataTemplate;

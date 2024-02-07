@@ -8,9 +8,9 @@
              Background="{DynamicResource BackGround}"
              Shell.TabBarIsVisible="False">
 
-    <!--<ContentView.BindingContext>
+    <ContentView.BindingContext>
         <viewmodel:NewDailyVM/>
-    </ContentView.BindingContext>-->
+    </ContentView.BindingContext>
 
     <!--#region  Carrousel Tabs-->
 
@@ -125,10 +125,10 @@
                     <RoundRectangle CornerRadius="15"/>
                 </Border.StrokeShape>
             </Border>
-            <calendar:Calendar FooterSectionVisible="False" SelectedDate="{Binding SelectedDate}"
+            <calendar:Calendar FooterSectionVisible="False" SelectedDate="{Binding SelectedDate}" MinimumDate="{Binding MinimuDate}"
                                DayTappedCommand="{Binding ChangeDayCommand}"/>
         </Grid>
-        <CarouselView x:Name="Carouselview" Grid.Row="1" VerticalOptions="EndAndExpand" IsSwipeEnabled="False" 
+        <CarouselView x:Name="Carouselview" Grid.Row="1" VerticalOptions="EndAndExpand" IsSwipeEnabled="False"
                       ItemsSource="{Binding CarrouselTemplates}" ItemTemplate="{StaticResource carrouselTemplate}"/>
 
         <Image Source="previous" Grid.Row="1" HeightRequest="40" VerticalOptions="Start" HorizontalOptions="Start">

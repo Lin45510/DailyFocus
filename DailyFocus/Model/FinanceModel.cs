@@ -27,6 +27,7 @@ namespace DailyFocus.Model
         public string Month { get; set; }
         public string Year { get; set; }
         public int FinanceID { get; set; }
+        public string PaidDate { get; set; }
         public int Type { get; set; } // 0 - À Pagar || 1 - À Receber || 2 - Entrada || 3 Saida
         public double Value { get; set; }
 
@@ -79,6 +80,7 @@ namespace DailyFocus.Model
                         Type = name.Type,
                         Year = name.Year,
                         Value = name.Value,
+                        PaidDate = name.PaidDate,
                     });
                 }
 
@@ -107,6 +109,7 @@ namespace DailyFocus.Model
                 1 => finList.Where(x => x.Type == 1).ToList(),
                 2 => finList.Where(x => x.Type == 2).ToList(),
                 3 => finList.Where(x => x.Type == 3).ToList(),
+                4 => finList.Where(x => x.Type == 2 || x.Type == 3).ToList(),
                 _ => finList,
             };
             foreach (FinanceModel finance in finances)

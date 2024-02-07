@@ -14,7 +14,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DailyFocus.ViewModel
 {
@@ -39,6 +38,9 @@ namespace DailyFocus.ViewModel
 
         [ObservableProperty]
         DateTime selectedDate = DateTime.Now.Date;
+
+        [ObservableProperty]
+        DateTime minimuDate = DateTime.Now.Date;
 
         [ObservableProperty]
         string commitName;
